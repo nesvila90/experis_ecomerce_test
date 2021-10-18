@@ -1,0 +1,11 @@
+dependencies {
+    implementation project(':usecase')
+    implementation project(':model')
+    implementation project(':h2-commons')
+    //annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+
+}
