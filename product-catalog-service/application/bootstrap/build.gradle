@@ -5,7 +5,7 @@ dependencies {
     implementation project(':usecase')
     implementation project(':reactive-web')
     implementation project(':reactive-persistence')
-    compileOnly 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation project(':reactive-batch')
     implementation('org.springframework.boot:spring-boot-starter')
     compileOnly('org.springframework.boot:spring-boot-devtools')
 }
