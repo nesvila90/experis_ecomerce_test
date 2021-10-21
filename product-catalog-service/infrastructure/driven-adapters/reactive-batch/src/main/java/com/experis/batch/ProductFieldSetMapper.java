@@ -1,12 +1,12 @@
 package com.experis.batch;
 
-import static com.experis.model.product.Status.setStatusFromString;
 import static com.experis.model.product.FieldName.BRAND;
 import static com.experis.model.product.FieldName.DISCOUNT_PERCENTAGE;
 import static com.experis.model.product.FieldName.NAME;
 import static com.experis.model.product.FieldName.PRICE;
 import static com.experis.model.product.FieldName.STATUS;
 import static com.experis.model.product.FieldName.STOCK_QUANTITY;
+import static com.experis.model.product.Status.setStatusFromString;
 
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;

@@ -49,5 +49,9 @@ logging:
 routes:
   product-catalog:
     root: "products"
+  cart:
+    root: "cart"
+    add: "add"
+    all-content-by-id: "id"
 massive-load:
   input-file: "./Productos (5).csv"

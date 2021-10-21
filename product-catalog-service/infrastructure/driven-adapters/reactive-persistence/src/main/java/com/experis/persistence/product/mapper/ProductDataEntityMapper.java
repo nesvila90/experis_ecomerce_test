@@ -1,4 +1,4 @@
-package com.experis.persistence.product.repository.mapper;
+package com.experis.persistence.product.mapper;
 
 import com.experis.model.commons.PageDTO;
 import com.experis.model.commons.PageMetadata;
@@ -30,6 +30,10 @@ public class ProductDataEntityMapper {
         .pageMetadata(pageMetadata)
         .content(productModels)
         .build();
+  }
+
+  public ProductModel toModel(Product product){
+    return productEntityMapper.toModel(product);
   }
 
 }
