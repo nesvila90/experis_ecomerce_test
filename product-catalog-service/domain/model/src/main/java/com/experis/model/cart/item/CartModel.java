@@ -1,23 +1,19 @@
-package com.experis.persistence.cart.model;
+package com.experis.model.cart.item;
 
+import com.experis.model.product.ProductModel;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder(toBuilder = true)
-public class Cart {
+public class CartModel {
 
-  @Id
   private Long id;
+  private Long cartId;
   private Long productId;
   private Integer quantity;
   private LocalDateTime cartItemAddedDate;
-
+  private ProductModel product;
 
 }

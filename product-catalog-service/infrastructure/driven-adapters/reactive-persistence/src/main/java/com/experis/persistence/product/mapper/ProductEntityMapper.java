@@ -1,7 +1,7 @@
-package com.experis.persistence.product.repository.mapper;
+package com.experis.persistence.product.mapper;
 
-import com.experis.model.product.Status;
 import com.experis.model.product.ProductModel;
+import com.experis.model.product.Status;
 import com.experis.persistence.product.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

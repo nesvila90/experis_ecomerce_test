@@ -51,6 +51,7 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
     return Mono.just(request)
         .map(this::getError)
         .flatMap(Mono::error)
+        .log()
         .onErrorResume(TechnicalException.class, this::buildErrorResponse)
         .onErrorResume(BusinessException.class, this::buildErrorResponse)
         .onErrorResume(this::buildErrorResponse)

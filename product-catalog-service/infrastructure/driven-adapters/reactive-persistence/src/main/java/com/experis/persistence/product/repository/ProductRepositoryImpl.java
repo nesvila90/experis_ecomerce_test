@@ -4,10 +4,9 @@ import com.experis.model.commons.PageDTO;
 import com.experis.model.product.FieldName;
 import com.experis.model.product.ProductModel;
 import com.experis.model.product.ProductQueryFilters;
-import com.experis.model.inventory.InventoryModel;
 import com.experis.model.product.gateway.ProductRepository;
+import com.experis.persistence.product.mapper.ProductDataEntityMapper;
 import com.experis.persistence.product.model.Product;
-import com.experis.persistence.product.repository.mapper.ProductDataEntityMapper;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageImpl;
@@ -16,6 +15,7 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -46,14 +46,12 @@ public class ProductRepositoryImpl implements ProductRepository {
   }
 
   @Override
-  public Mono<InventoryModel> getStock(Long productId) {
-    Criteria verifyStockCriteria = buildVerifyStockCriteria(productId);
-    Query isStockAvailableQuery = Query.query(verifyStockCriteria);
+  public Mono<ProductModel> findById(Long productId){
+    Query allProductById = Query.query(Criteria.where(FieldName.ID.name()).in(productId));
     return r2dbcEntityTemplate.select(Product.class)
-        .matching(isStockAvailableQuery)
-        .one().map(product -> InventoryModel.builder().productId(productId).quantity(product.getStockQuantity()).build());
+        .matching(allProductById).one()
+        .map(productDataEntityMapper::toModel);
   }
-
 
   private Criteria createFindByFiltersCriteria(ProductQueryFilters queryFilters) {
     var name = queryFilters.getName();
@@ -73,11 +71,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     return base;
   }
 
-  private Criteria buildVerifyStockCriteria(Long productId) {
-    return Criteria.where(FieldName.ID.name()).is(productId)
-        .and(FieldName.STOCK_QUANTITY.name())
-        .greaterThan(0);
-  }
 
   private boolean validateStringEmptyAndNullValue(String evaluateString) {
     return Objects.isNull(evaluateString) || evaluateString.isEmpty();
